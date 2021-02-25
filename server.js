@@ -1,9 +1,9 @@
 var express=require('express');
 var app =express();
-var bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-var ServerFun = require('./myServer.js');
+//var bodyParser = require("body-parser");
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+var ServerFun = require('./server/mongodvServer.js');
 var sv = new ServerFun();
 //设置跨域访问
 app.all('*', function(req, res, next) {
@@ -37,6 +37,7 @@ app.post('/insertItem',function(req,res){
 //配置服务端口
 var server = app.listen(8081, function () {
     var host = server.address().address;
+    console.log(server.address())
     var port = server.address().port;
-    console.log('Example app listening at http://%s:%s', host, port)
+    console.log('Example app listening at http://127.0.0.1:%s', port)
 })
