@@ -23,6 +23,12 @@ app.get('/getItems',function(req,res){
         res.json(r)
     })
 });
+//写个接口123
+app.get('/',function(req,res){
+    res.status(200),
+    res.write('请输入参数')
+});
+
 app.post('/insertItem',function(req,res){
     let params = req.body;
     console.log(params)
@@ -34,10 +40,10 @@ app.post('/insertItem',function(req,res){
         })
     })
 });
+
 //配置服务端口
 var server = app.listen(8081, function () {
     var host = server.address().address;
-    console.log(server.address())
     var port = server.address().port;
     console.log('Example app listening at http://127.0.0.1:%s', port)
 })
