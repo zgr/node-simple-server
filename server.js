@@ -5,6 +5,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 var ServerFun = require('./server/mongodvServer.js');
 var sv = new ServerFun();
+var fs = require('fs');
 //设置跨域访问
 app.all('*', function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
@@ -15,6 +16,10 @@ app.all('*', function(req, res, next) {
    next();
 });
 
+app.get('/',function(req,res){
+    let data = fs.readFileSync('./web/index.html');
+    res.send(data)
+})
 //写个接口123
 app.get('/getItems',function(req,res){
     let params = req.query;
