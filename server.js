@@ -23,7 +23,7 @@ app.get('/',function(req,res){
 //写个接口123
 app.get('/getItems',function(req,res){
     let params = req.query;
-    sv.queryItems(params,function(r){
+    sv.queryItems({ status:'1',...params},function(r){
         res.status(200),
         res.json(r)
     })
@@ -37,7 +37,7 @@ app.get('/',function(req,res){
 app.post('/insertItem',function(req,res){
     let params = req.body;
     console.log(params)
-    sv.addItem(params,function(){
+    sv.addItem({status:'1', ...params},function(){
         res.status(200),
         res.json({
             code:"200",
@@ -45,6 +45,33 @@ app.post('/insertItem',function(req,res){
         })
     })
 });
+
+app.post('/deleteItem',function(req,res){ //物理删除
+    let params = req.body;
+    console.log(params)
+    sv.deleteItem(params,function(){
+        res.status(200),
+        res.json({
+            code:"200",
+            msg:"成功"
+        })
+    })
+});
+
+
+app.post('/removeItem',function(req,res){ //物理删除
+    let params = req.body;
+    console.log(params)
+    sv.updateItem({uuid:params.uuid, status:'0'},function(){
+        res.status(200),
+        res.json({
+            code:"200",
+            msg:"成功"
+        })
+    })
+});
+
+
 
 //配置服务端口
 var server = app.listen(8081, function () {
