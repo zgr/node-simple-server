@@ -64,7 +64,7 @@ function MyApi() {
                 dbo.collection("site").updateOne(whereStr, updateStr, function (err, res) {
                     if (err) throw err;
                     callback(res);
-                    console.log("文档删除成功");
+                    console.log("文档修改成功");
                     db.close();
                 });
             });

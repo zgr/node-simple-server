@@ -59,10 +59,22 @@ app.post('/deleteItem',function(req,res){ //物理删除
 });
 
 
-app.post('/removeItem',function(req,res){ //物理删除
+app.post('/removeItem',function(req,res){ //逻辑删除
     let params = req.body;
     console.log(params)
     sv.updateItem({uuid:params.uuid, status:'0'},function(){
+        res.status(200),
+        res.json({
+            code:"200",
+            msg:"成功"
+        })
+    })
+});
+
+app.post('/updateItem',function(req,res){
+    let params = req.body;
+    console.log(params)
+    sv.updateItem({status:'1', ...params},function(){
         res.status(200),
         res.json({
             code:"200",
