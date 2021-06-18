@@ -3,7 +3,7 @@ var app =express();
 //var bodyParser = require("body-parser");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-var ServerFun = require('./server/mongodvServer.js');
+var ServerFun = require('./server/mongodbServer.js');
 var sv = new ServerFun();
 var fs = require('fs');
 //设置跨域访问
