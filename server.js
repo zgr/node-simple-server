@@ -6,6 +6,16 @@ app.use(express.urlencoded({ extended: true }));
 var ServerFun = require('./server/mongodbServer.js');
 var sv = new ServerFun();
 var fs = require('fs');
+
+const getSuccessRes = function(r){
+    return {
+        data:r || {},
+        resCode:200,
+        message:'成功',
+        success:true
+    }
+}
+
 //设置跨域访问
 app.all('*', function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
@@ -25,7 +35,7 @@ app.get('/getItems',function(req,res){
     let params = req.query;
     sv.queryItems({ status:'1',...params},function(r){
         res.status(200),
-        res.json(r)
+        res.json(getSuccessRes(r))
     })
 });
 //写个接口123
@@ -39,10 +49,7 @@ app.post('/insertItem',function(req,res){
     console.log(params)
     sv.addItem({status:'1', ...params},function(){
         res.status(200),
-        res.json({
-            code:"200",
-            msg:"成功"
-        })
+        res.json(getSuccessRes())
     })
 });
 
@@ -51,10 +58,7 @@ app.post('/deleteItem',function(req,res){ //物理删除
     console.log(params)
     sv.deleteItem(params,function(){
         res.status(200),
-        res.json({
-            code:"200",
-            msg:"成功"
-        })
+        res.json(getSuccessRes())
     })
 });
 
@@ -64,10 +68,7 @@ app.post('/removeItem',function(req,res){ //逻辑删除
     console.log(params)
     sv.updateItem({uuid:params.uuid, status:'0'},function(){
         res.status(200),
-        res.json({
-            code:"200",
-            msg:"成功"
-        })
+        res.json(getSuccessRes())
     })
 });
 
@@ -76,13 +77,9 @@ app.post('/updateItem',function(req,res){
     console.log(params)
     sv.updateItem({status:'1', ...params},function(){
         res.status(200),
-        res.json({
-            code:"200",
-            msg:"成功"
-        })
+        res.json(getSuccessRes())
     })
 });
-
 
 
 //配置服务端口
