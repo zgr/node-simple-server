@@ -1,3 +1,3 @@
 module.exports = {
-    mongoUrl:"mongodb://47.106.187.58:27017/"
+    mongoUrl:"mongodb://service.zhangpeng:27017/"
 }
